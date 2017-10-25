@@ -6,7 +6,7 @@
 /*   By: zgodongw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 18:00:57 by zgodongw          #+#    #+#             */
-/*   Updated: 2017/10/25 11:04:39 by zgodongw         ###   ########.fr       */
+/*   Updated: 2017/10/25 11:06:38 by zgodongw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,10 +153,10 @@ class Rules : public Setup {
 		
 		std::vector<std::string>			splitXORstr(const std::string& str)
 		{
-			int 						i = 0;
-			bool 						open = false;
-			bool 						close = false;
-			std::vector<std::string> 	strarray;
+			int 							i = 0;
+			bool 							open = false;
+			bool 							close = false;
+			std::vector<std::string> 		strarray;
 
 			while (i < (int)str.length())
 			{
@@ -216,19 +216,19 @@ class Rules : public Setup {
 			return true;
 		}
 
-		void								setConclusions(const std::string& string) // doesn't support parenthesise
+		void								setConclusions(const std::string& string)
 		{
-			int i = 0;
-			std::string	cstr;
-			std::size_t found;
-			std::vector<std::string> substr;
+			int								i = 0;
+			std::string						cstr;
+			std::size_t						found;
+			std::vector<std::string>		substr;
 
 			while (string[i] != '>' && i < (int)string.length())
 				i++;
 
 			cstr = &string[++i];
 
-			found = cstr.find("|"); // throw error if '^' is found
+			found = cstr.find("|");
 			if (found == std::string::npos) {
 				substr = splitANDstr(cstr);
 
@@ -247,7 +247,7 @@ class Rules : public Setup {
 	public:
 		std::vector<std::string>			getRules(const std::vector<std::string>& strings)
 		{
-			std::vector<std::string> rule;
+			std::vector<std::string>		rule;
 
 			for (int i = 0; i < (int)strings.size(); i++) {
 				if (strings[i][0] != '?' && strings[i][0] != '=')
