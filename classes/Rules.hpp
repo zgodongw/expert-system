@@ -6,7 +6,7 @@
 /*   By: zgodongw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 18:00:57 by zgodongw          #+#    #+#             */
-/*   Updated: 2017/10/25 11:06:38 by zgodongw         ###   ########.fr       */
+/*   Updated: 2017/10/25 11:08:37 by zgodongw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,8 @@ class Rules : public Setup {
 		bool								evalXORblock(const std::string& line)
 		{
 			std::map<int, bool>				block;
-            std::vector<std::string>		strblock;
-			
+			std::vector<std::string>		strblock;
+
 			strblock = splitXORstr(line);
 			for (int i = 0; i < (int)strblock.size(); i++) {
 				block[i] = evalORblock(strblock[i]);
@@ -150,7 +150,7 @@ class Rules : public Setup {
 				return true;
 			return false;
 		}
-		
+
 		std::vector<std::string>			splitXORstr(const std::string& str)
 		{
 			int 							i = 0;
