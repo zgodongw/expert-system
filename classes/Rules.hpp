@@ -6,7 +6,7 @@
 /*   By: zgodongw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 18:00:57 by zgodongw          #+#    #+#             */
-/*   Updated: 2017/10/25 09:46:30 by zgodongw         ###   ########.fr       */
+/*   Updated: 2017/10/25 11:02:56 by zgodongw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ class Rules : public Setup {
 			int 						i = 0;
 			bool 						open = false;
 			bool 						close = false;
-			std::vector<std::string> 	strarray;
-
-			while (i < (int)str.length())
-			{
-				std::string strdup;
-				while (str[i])
-				{
+			std::vector<std::string>	strarray;
+			
+			while (i < (int)str.length()) {
+				std::string				strdup;
+				while (str[i]) {
 					if (str[i] == '<' || str[i] == '=')
 						close = true;
 					if (str[i] == '(')
@@ -54,52 +52,47 @@ class Rules : public Setup {
 			}
 			return strarray;
 		}
-
+		
 		std::vector<std::string>			splitANDstr(const std::string& str)
 		{
-            int 							i = 0;
-            bool 							open = false; // change this to int for multiple parenthesise
-            bool 							close = false;
-            std::vector<std::string>		strarray;
-            
-            while (i < (int)str.length())
-            {
-                std::string strdup;
-                while (str[i])
-                {
-                    if (str[i] == '<' || str[i] == '=')
-                        close = true;
-                    if (str[i] == '(')
-					{
-                        open = true;
+			int								i = 0;
+			bool							open = false;
+			bool 							close = false;
+			std::vector<std::string>		strarray;
+			
+			while (i < (int)str.length()) {
+				std::string					strdup;
+				while (str[i]) {
+					if (str[i] == '<' || str[i] == '=')
+						close = true;
+					if (str[i] == '(') {
+						open = true;
 						i++;
 					}
-                    else if (str[i] == ')')
-					{
-                        open = false;
+					else if (str[i] == ')') {
+						open = false;
 						i++;
 					}
-                    if (str[i] != '+' && open == false && close == false)
-                        strdup += str[i];
-                    else if (open == true && close == false)
-                        strdup += str[i];
-                    else
-                        break ;
-                    i++;
-                }
-                if (!strdup.empty())
-                    strarray.emplace_back(strdup);
-                i++;
-            }
-            return strarray;
+					if (str[i] != '+' && open == false && close == false)
+						strdup += str[i];
+					else if (open == true && close == false)
+						strdup += str[i];
+					else
+						break ;
+					i++;
+				}
+				if (!strdup.empty())
+					strarray.emplace_back(strdup);
+				i++;
+			}
+			return strarray;
 		}
-
+		
 		bool 								evalANDBlock(const std::string& line)
 		{
 			std::vector<std::string>		strblock;
 			std::map<int, bool>				block;
 			std::string						str;
-			Log e;
 
 			strblock = splitANDstr(line);
 			for  (long i = 0; i < (long)strblock.size(); i++) {
@@ -132,38 +125,32 @@ class Rules : public Setup {
 
 		bool								evalORblock(const std::string& line)
 		{
-            std::map<int, bool> block;
-            std::vector<std::string> strblock;
-			Log e;
+			std::map<int, bool>				block;
+			std::vector<std::string>		strblock;
 
-            strblock = splitORstr(line);
-            for (int i = 0; i < (int)strblock.size(); i++)
-            {
-                block[i] = evalANDBlock(strblock[i]);
-            }
+			strblock = splitORstr(line);
+			for (int i = 0; i < (int)strblock.size(); i++) {
+				block[i] = evalANDBlock(strblock[i]);
+			}
 			if (solveORblocks(block) == true)
 				return true;
 			return false;
-
 		}
-
+		
 		bool								evalXORblock(const std::string& line)
 		{
-            std::map<int, bool> block;
-            std::vector<std::string> strblock;
-			Log e;
-
-            strblock = splitXORstr(line);
-            for (int i = 0; i < (int)strblock.size(); i++)
-            {
-                block[i] = evalORblock(strblock[i]);
-            }
+			std::map<int, bool>				block;
+            std::vector<std::string>		strblock;
+			
+			strblock = splitXORstr(line);
+			for (int i = 0; i < (int)strblock.size(); i++) {
+				block[i] = evalORblock(strblock[i]);
+			}
 			if (solveXORblocks(block) == true)
 				return true;
 			return false;
-
 		}
-
+		
 		std::vector<std::string>			splitXORstr(const std::string& str)
 		{
 			int 						i = 0;
@@ -201,8 +188,7 @@ class Rules : public Setup {
 		{
 			if (block.size() > 2)
 				return false;
-			else if (block.size() == 2)
-			{
+			else if (block.size() == 2) {
 				if ((block[0] == true && block[1] == false)
 					|| (block[0] == false && block[1] == true))
 					return true;
@@ -236,11 +222,10 @@ class Rules : public Setup {
 			std::string	cstr;
 			std::size_t found;
 			std::vector<std::string> substr;
-			
 
 			while (string[i] != '>' && i < (int)string.length())
 				i++;
-			
+
 			cstr = &string[++i];
 
 			found = cstr.find("|"); // throw error if '^' is found
@@ -257,7 +242,6 @@ class Rules : public Setup {
 					}
 				}
 			}
-			
 		}
 
 	public:
@@ -265,20 +249,16 @@ class Rules : public Setup {
 		{
 			std::vector<std::string> rule;
 
-			for (int i = 0; i < (int)strings.size(); i++)
-			{
+			for (int i = 0; i < (int)strings.size(); i++) {
 				if (strings[i][0] != '?' && strings[i][0] != '=')
 					rule.emplace_back(strings[i]);
 			}
-
 			return (rule);
-
 		}
 
 		void								Programloop(const std::vector<std::string>& strings)
 		{
 			int 							ruleamount;
-			Log 							console;
 			std::vector<std::string>		rules;
 
 			rules = getRules(strings);
