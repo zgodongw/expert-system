@@ -6,7 +6,7 @@
 /*   By: zgodongw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 18:01:06 by zgodongw          #+#    #+#             */
-/*   Updated: 2017/10/25 09:44:47 by zgodongw         ###   ########.fr       */
+/*   Updated: 2017/10/25 09:24:14 by zgodongw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ class Setup : public InstructionMap {
 			
 			file.open(argv);
 			if (file.fail()) {
-				std::cerr << "Error opening file\n";
-				exit(255);
+				PRINT RED BOLD "Error: "<<RESET BOLD<<"could not open file!" END;
+				return std::vector<std::string>();
 			}
 			
 			std::string line;

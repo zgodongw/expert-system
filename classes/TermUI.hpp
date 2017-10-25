@@ -6,7 +6,7 @@
 /*   By: zgodongw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 18:01:14 by zgodongw          #+#    #+#             */
-/*   Updated: 2017/10/25 10:05:07 by zgodongw         ###   ########.fr       */
+/*   Updated: 2017/10/25 08:55:25 by zgodongw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ class TermUI {
 			}
 			return strarray;
 		}
-
 
 		void									printRules(const std::vector<std::string>& rules)
 		{
@@ -80,7 +79,36 @@ class TermUI {
 			return ("nothing");
 		}
 
+		void									filePutContents(const std::string& name, const std::string& content, bool append = false)
+		{
+			std::ofstream outfile;
+			if (append)
+				outfile.open(name, std::ios_base::app);
+			else
+				outfile.open(name);
+			outfile << content;
+		}
+
 	public:
+
+		std::string								interact()
+		{
+			std::string							line;
+			int									i = 1;
+			
+			while (1) {
+				PRINT BLUE BOLD "Rule " << i << " : "<<RESET BOLD;
+				std::getline(std::cin,line);
+				filePutContents("temp.txt", line, true);
+				filePutContents("temp.txt", "\n", true);
+				if (line[0] == '?')
+					break ;
+				i++;
+			}
+			PRINT "" END;
+			return "temp.txt";
+		}
+
 		void									InitUI(const std::vector<std::string>& argv)
 		{
 			Rules								r;
@@ -89,7 +117,6 @@ class TermUI {
 
 			states = getStates(argv);
 			rule = r.getRules(argv);
-			PRINT CLEAR;
 			PRINT RESET BOLD  "Using " << MAGENTA << states << RESET BOLD " as "<<GREEN "true:" END END;
 			PRINT RESET BOLD  "Using Rules: " END;
 			printRules(rule);
@@ -107,12 +134,12 @@ class TermUI {
 		
 			while (1) {
 				errors = 0;
-				PRINT BOLD BLUE "\nWould you like to query another fact? (y/n) : ";
+				PRINT BOLD BLUE "\nWould you like to query another fact? (y/n) : "<<RESET BOLD;
 
 				std::cin >> option;
-			if (option == "y" || option == "yes"
+				if (option == "y" || option == "yes"
 					|| option == "Y" || option == "YES") {
-				PRINT "Please Enter Query/ies here : ";
+				PRINT BOLD BLUE "\nPlease Enter Query here : "<<RESET BOLD MAGENTA;
 				std::cin >> query;
 				for (int i = 0; i < (int)query.length(); i++) {
 					if (!isalpha(query[i]) || !(query[i] >= 'A' && query[i] <='Z')) {
@@ -126,7 +153,7 @@ class TermUI {
 			}
 			else if (option == "n" || option == "N"
 					|| option == "no" || option == "NO"){
-				PRINT RESET BOLD "PROGRAM TERMINATED" END;
+				PRINT RESET BOLD "\n     (╯°□°）╯︵ ┻━┻ \n" END;
 				break ;
 			}
 			else

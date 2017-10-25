@@ -18,10 +18,9 @@ class InstructionMap
 {
 	public:
 		InstructionMap(void) {
-
 			//empty constructor
-			}
-		
+		}
+
 		void	initMap(void)
 		{
 			fact['A'] = false;

@@ -14,8 +14,7 @@
 
 #pragma once
 
-class Error : public Rules {
-
+class Error {
 	public:
 		Error () {
 			// empty constructor
@@ -55,7 +54,7 @@ class Error : public Rules {
 		bool			goodRule(const std::string& rule)
 		{
 			int			xors = 0;
-			bool		open = false;
+			int			open = 0;
 
 			if (rule.empty())
 				return false;
@@ -63,15 +62,21 @@ class Error : public Rules {
 				return false;
 			for (int j = 0; j < (int)rule.length(); j++) {
 				if (rule[j] == '(')
-					open = true;
+					open++;
+				if (open > 1)
+					break ;
 				if (rule[j] == ')')
-					open = false;
+					open--;
 				if (rule[j] == '^' && open == false)
 					xors++;
 			}
 			if (xors > 1) {
 				return false;
 			}
+			if (open != 0)
+				return false;
+			if (rule[0] != '=' && rule[0] != '?' && rule.find("=>") == std::string::npos)
+				return false;
 			for (int i = 0; i < (int)rule.length(); i++) {
 				if (isOperator(rule[i]) && !isfactelem(rule[i + 1]))
 					return false;
@@ -96,19 +101,23 @@ class Error : public Rules {
 					queries++;
 				if (goodRule(lines[i]) == false) {
 					errors++;
-					PRINT BOLD RED"Error:"<<RESET BOLD<< "Invalid rule found at Rule: "<< i <<"!" END;
+					PRINT BOLD RED"Error:"<<RESET
+					BOLD<< "Invalid rule found at Rule: "<< i + 1<<"!" END;
 				}
 				if (goodConclusion(lines[i]) == false) {
 					errors++;
-					PRINT BOLD RED"Error: "<<RESET BOLD<<"Invalid conclusion fount at Rule " << i << "!" END;
+					PRINT BOLD RED"Error: "<<RESET
+					BOLD<<"Invalid conclusion fount at Rule " << i + 1<< "!" END;
 				}
 				i++;
 			}
 			if (queries > 1) {
-				PRINT BOLD YELLOW "Warning: "<<RESET BOLD<<"More than 1 query statement found!" END;
+				PRINT BOLD YELLOW "Warning: "<<RESET
+				BOLD<<"More than 1 query statement found!" END;
 			}
 			if (inifacts > 1) {
-				PRINT BOLD RED"Error: " <<RESET BOLD<<"More than 1 \'Initial fact\' statement found!" END;
+				PRINT BOLD RED"Error: " <<RESET
+				BOLD<<"More than 1 \'Initial Fact\' statement found!" END;
 				errors++;
 			}
 
