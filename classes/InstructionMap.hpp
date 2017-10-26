@@ -24,31 +24,31 @@ class InstructionMap
 		void	initMap(void)
 		{
 			fact['A'] = false;
-            fact['B'] = false;
-            fact['C'] = false;
-            fact['D'] = false;
-            fact['E'] = false;
-            fact['F'] = false;
-            fact['G'] = false;
-            fact['H'] = false;
-            fact['I'] = false;
-            fact['G'] = false;
-            fact['K'] = false;
-            fact['L'] = false;
-            fact['M'] = false;
-            fact['N'] = false;
-            fact['O'] = false;
-            fact['P'] = false;
-            fact['Q'] = false;
-            fact['R'] = false;
-            fact['S'] = false;
-            fact['T'] = false;
-            fact['U'] = false;
-            fact['V'] = false;
-            fact['W'] = false;
-            fact['X'] = false;
-            fact['Y'] = false;
-            fact['Z'] = false;
+			fact['B'] = false;
+			fact['C'] = false;
+			fact['D'] = false;
+			fact['E'] = false;
+			fact['F'] = false;
+			fact['G'] = false;
+			fact['H'] = false;
+			fact['I'] = false;
+			fact['G'] = false;
+			fact['K'] = false;
+			fact['L'] = false;
+			fact['M'] = false;
+			fact['N'] = false;
+			fact['O'] = false;
+			fact['P'] = false;
+			fact['Q'] = false;
+			fact['R'] = false;
+			fact['S'] = false;
+			fact['T'] = false;
+			fact['U'] = false;
+			fact['V'] = false;
+			fact['W'] = false;
+			fact['X'] = false;
+			fact['Y'] = false;
+			fact['Z'] = false;
 		}
 
 		void	setFact(const std::string& truefacts)
