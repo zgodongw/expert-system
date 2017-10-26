@@ -22,12 +22,12 @@ class Rules : public Setup {
 
 	private:
 		
-		std::vector<std::string>			splitstr(const std::string& str, char c)
+		std::vector<std::string>		splitstr(const std::string& str, char c)
 		{
-			int								i = 0;
-			bool							open = false;
-			bool 							close = false;
-			std::vector<std::string>		strarray;
+			int				i = 0;
+			bool				open = false;
+			bool 				close = false;
+			std::vector<std::string>	strarray;
 			
 			while (i < (int)str.length()) {
 				std::string					strdup;
@@ -59,10 +59,10 @@ class Rules : public Setup {
 			return strarray;
 		}
 		
-		bool								evalXORblock(const std::string& line)
+		bool					evalXORblock(const std::string& line)
 		{
-			std::map<int, bool>				block;
-			std::vector<std::string>		strblock;
+			std::map<int, bool>		block;
+			std::vector<std::string>	strblock;
 
 			strblock = splitstr(line, '^');
 			for (int i = 0; i < (int)strblock.size(); i++) {
@@ -73,10 +73,10 @@ class Rules : public Setup {
 			return false;
 		}
 		
-		bool								evalORblock(const std::string& line)
+		bool					evalORblock(const std::string& line)
 		{
-			std::map<int, bool>				block;
-			std::vector<std::string>		strblock;
+			std::map<int, bool>		block;
+			std::vector<std::string>	strblock;
 
 			strblock = splitstr(line, '|');
 			for (int i = 0; i < (int)strblock.size(); i++) {
@@ -87,11 +87,11 @@ class Rules : public Setup {
 			return false;
 		}
 
-		bool 								evalANDBlock(const std::string& line)
+		bool 					evalANDBlock(const std::string& line)
 		{
-			std::vector<std::string>		strblock;
-			std::map<int, bool>				block;
-			std::string						str;
+			std::vector<std::string>	strblock;
+			std::map<int, bool>		block;
+			std::string			str;
 
 			strblock = splitstr(line, '+');
 			for  (long i = 0; i < (long)strblock.size(); i++) {
@@ -122,7 +122,7 @@ class Rules : public Setup {
 			return false;
 		}
 
-		bool								solveBlocks(std::map<int, bool>& block, char c)
+		bool					solveBlocks(std::map<int, bool>& block, char c)
 		{
 			if (c == '^') {
 				if (block.size() > 2)
@@ -155,12 +155,12 @@ class Rules : public Setup {
 			return false;
 		}
 
-		void								setConclusions(const std::string& string)
+		void					setConclusions(const std::string& string)
 		{
-			int								i = 0;
-			std::string						cstr;
-			std::size_t						found;
-			std::vector<std::string>		substr;
+			int				i = 0;
+			std::string			cstr;
+			std::size_t			found;
+			std::vector<std::string>	substr;
 
 			while (string[i] != '>' && i < (int)string.length())
 				i++;
@@ -184,9 +184,9 @@ class Rules : public Setup {
 		}
 
 	public:
-		std::vector<std::string>			getRules(const std::vector<std::string>& strings)
+		std::vector<std::string>		getRules(const std::vector<std::string>& strings)
 		{
-			std::vector<std::string>		rule;
+			std::vector<std::string>	rule;
 
 			for (int i = 0; i < (int)strings.size(); i++) {
 				if (strings[i][0] != '?' && strings[i][0] != '=')
@@ -195,10 +195,10 @@ class Rules : public Setup {
 			return (rule);
 		}
 
-		void								Programloop(const std::vector<std::string>& strings)
+		void					Programloop(const std::vector<std::string>& strings)
 		{
-			int 							ruleamount;
-			std::vector<std::string>		rules;
+			int 				ruleamount;
+			std::vector<std::string>	rules;
 
 			rules = getRules(strings);
 			ruleamount = (int)rules.size();;
