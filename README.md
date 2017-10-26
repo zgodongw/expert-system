@@ -20,7 +20,7 @@ A fact can only be undetermined if the ruleset is ambiguous,
 for example if I say "A is true, also if A then B or C", then B and C are undetermined.
 
 # Features
-Here’s a list of the features the engine to supports.
+Here’s a list of the features the engine supports.
 
 • "AND" conditions. For example, "If A and B and [...] then X"
 
