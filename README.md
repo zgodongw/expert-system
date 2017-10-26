@@ -42,11 +42,14 @@ expression.
 
 # How to install
 
-git clone 
+git clone https://github.com/zgodongw/expert-system.git
+
 cd ./expert-system && make re
 
 # Run the program
 
 with make [1 - 9] for given test cases.
+
 or ./system
+
 and insert rules.
