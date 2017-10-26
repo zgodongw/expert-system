@@ -4,8 +4,8 @@ How to do simple logic... Or not so simple
 # What It Is
 This is an expert system for propositional calculus.
 
-This program implement a backward-chaining inference engine. Rules and facts will be given
-as a text file, the format of which is described in the appendix.
+This program implements a backward-chaining inference engine. Rules and facts will be given
+as a text file
 
 A fact can be any uppercase alphabetical character.
 
@@ -48,7 +48,7 @@ cd ./expert-system && make re
 
 # Run the program
 
-with make [1 - 9] for given test cases.
+with make [1 - 9] to run given test cases.
 
 or ./system
 
