@@ -21,7 +21,7 @@ class Error {
 		}
 
 	private:
-		
+
 		bool			isOperator(char c)
 		{
 			if (c == '+' || c == '|' || c == '>' || c == '^')
@@ -29,10 +29,10 @@ class Error {
 			return false;
 		}
 
-		bool			isfactelem(char c)
+		bool			isFactelem(char c)
 		{
 			if ((c >= 'A' && c <= 'Z') || c == '!'
-					|| c == '=' || c == '(' || c == ')' || c == '?')
+			|| c == '(' || c == ')' || c == '?')
 				return true;
 			return false;
 		}
@@ -46,7 +46,9 @@ class Error {
 				i++;
 			cstr = &rule[++i];
 
-			if (cstr.find("^") != std::string::npos)
+			if (cstr.find("^") != std::string::npos
+			|| cstr.find("(")  != std::string::npos
+			|| cstr.find(")")  != std::string::npos)
 				return false;
 			return true;
 		}
@@ -58,7 +60,7 @@ class Error {
 
 			if (rule.empty())
 				return false;
-			if (!isfactelem(rule[0]))
+			if (!isFactelem(rule[0]) && rule[0] != '=')
 				return false;
 			for (int j = 0; j < (int)rule.length(); j++) {
 				if (rule[j] == '(')
@@ -78,8 +80,10 @@ class Error {
 			if (rule[0] != '=' && rule[0] != '?' && rule.find("=>") == std::string::npos)
 				return false;
 			for (int i = 0; i < (int)rule.length(); i++) {
-				if (isOperator(rule[i]) && !isfactelem(rule[i + 1]))
+				
+				if (isOperator(rule[i]) && !isFactelem(rule[i + 1])) {
 					return false;
+				}
 			}
 			return true;
 		}
@@ -101,7 +105,7 @@ class Error {
 					queries++;
 				if (goodRule(lines[i]) == false) {
 					errors++;
-					PRINT BOLD RED"Error:"<<RESET
+					PRINT BOLD RED"Error: "<<RESET
 					BOLD<< "Invalid rule found at Rule: "<< i + 1<<"!" END;
 				}
 				if (goodConclusion(lines[i]) == false) {
