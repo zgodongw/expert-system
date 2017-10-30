@@ -23,32 +23,32 @@ class InstructionMap
 
 		void	initMap(void)
 		{
-			fact['A'] = false;
-			fact['B'] = false;
-			fact['C'] = false;
-			fact['D'] = false;
-			fact['E'] = false;
-			fact['F'] = false;
-			fact['G'] = false;
-			fact['H'] = false;
-			fact['I'] = false;
-			fact['G'] = false;
-			fact['K'] = false;
-			fact['L'] = false;
-			fact['M'] = false;
-			fact['N'] = false;
-			fact['O'] = false;
-			fact['P'] = false;
-			fact['Q'] = false;
-			fact['R'] = false;
-			fact['S'] = false;
-			fact['T'] = false;
-			fact['U'] = false;
-			fact['V'] = false;
-			fact['W'] = false;
-			fact['X'] = false;
-			fact['Y'] = false;
-			fact['Z'] = false;
+            fact['A'] = false;
+            fact['B'] = false;
+            fact['C'] = false;
+            fact['D'] = false;
+            fact['E'] = false;
+            fact['F'] = false;
+            fact['G'] = false;
+            fact['H'] = false;
+            fact['I'] = false;
+            fact['G'] = false;
+            fact['K'] = false;
+            fact['L'] = false;
+            fact['M'] = false;
+            fact['N'] = false;
+            fact['O'] = false;
+            fact['P'] = false;
+            fact['Q'] = false;
+            fact['R'] = false;
+            fact['S'] = false;
+            fact['T'] = false;
+            fact['U'] = false;
+            fact['V'] = false;
+            fact['W'] = false;
+            fact['X'] = false;
+            fact['Y'] = false;
+            fact['Z'] = false;
 		}
 
 		void	setFact(const std::string& truefacts)
@@ -60,6 +60,10 @@ class InstructionMap
 		void	setFact(char c)
 		{
 			fact[c] = true;
+        }
+        void	setundefFact(char c)
+		{
+			fact[c] = (-1);
 		}
 
 		void	unsetFact(char c)
@@ -73,8 +77,11 @@ class InstructionMap
 				for (int i = 1; i < (int)query.length(); i++) {
 					if (fact[query[i]] == true)
 						PRINT BOLD MAGENTA <<query[i] <<RESET<< " is " << BOLD GREEN"true!"  END;
-					else
-						PRINT BOLD MAGENTA << query[i] <<RESET<<" is "<< BOLD RED"false!" END;				}
+					else if (fact[query[i]] == false)
+                        PRINT BOLD MAGENTA << query[i] <<RESET<<" is "<< BOLD RED"false!" END;
+                    else
+                        PRINT BOLD MAGENTA << query[i] <<RESET<<" is "<< BOLD RED"undefined!" END;   
+                    }
 			}
 			else
 				std::cout << "No queries found!" << std::endl;

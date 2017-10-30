@@ -48,7 +48,9 @@ class Error {
 
 			if (cstr.find("^") != std::string::npos
 			|| cstr.find("(")  != std::string::npos
-			|| cstr.find(")")  != std::string::npos)
+			|| cstr.find(")")  != std::string::npos
+			|| (cstr.find("|") != std::string::npos
+			&& cstr.find("+")  != std::string::npos))
 				return false;
 			return true;
 		}

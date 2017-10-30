@@ -23,7 +23,7 @@ class Setup : public InstructionMap {
 
 	private:
 
-		bool					isValid(const char c)
+		bool						isValid(const char c)
 		{
 			if ((c >= 'A' && c <= 'Z') || c == '+'
 					|| c == '|' || c == '?' || c == '<' || c == '>'
@@ -34,9 +34,9 @@ class Setup : public InstructionMap {
 			return false;
 		}
 		
-		std::string				instructions(const std::string& line)
+		std::string					instructions(const std::string& line, bool val)
 		{
-			std::string			linedup;
+			std::string				linedup;
 
 			for (int i = 0; i < (int)line.length(); i++) {
 				if (line[i] == '#')
@@ -44,17 +44,15 @@ class Setup : public InstructionMap {
 				if (isValid(line[i]))
 					linedup += line[i];
 			}
-			if (linedup.find("<") != std::string::npos)
-			{
+			if (linedup.find("<") != std::string::npos && val == false)
 				linedup = setONLYif(linedup);
-			}
 			return (linedup);
 		}
 
-		std::string				setONLYif(const std::string& str)
+		std::string					setONLYif(const std::string& str)
 		{
-			int				i = 0;
-			std::string			line;
+			int						i = 0;
+			std::string				line;
 
 			while (str[i] != '>')
 				i++;
@@ -70,9 +68,9 @@ class Setup : public InstructionMap {
 
 	public:
 
-		std::vector<std::string>		start(const std::string& argv)
+		std::vector<std::string>		start(const std::string& argv, bool val)
 		{
-			std::ifstream			file;
+			std::ifstream				file;
 			
 			file.open(argv);
 			if (file.fail()) {
@@ -85,7 +83,7 @@ class Setup : public InstructionMap {
 
 			while (!file.eof()) {
 				std::getline(file, line);
-				line = instructions(line);
+				line = instructions(line, val);
 				if (!line.empty())
 					stringarray.emplace_back(line); //use emplace_back and compile with -std=c++14
 			}

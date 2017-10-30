@@ -20,10 +20,10 @@ class TermUI {
 			//empty constructor
 		}
 
-		std::vector<std::string>			splitspace(const std::string& str)
+		std::vector<std::string>				splitspace(const std::string& str)
 		{
-			int 					i = 0;
-			std::vector<std::string> 		strarray;
+			int 								i = 0;
+			std::vector<std::string> 			strarray;
 
 			while (i < (int)str.length())
 			{
@@ -43,10 +43,10 @@ class TermUI {
 			return strarray;
 		}
 
-		void						printRules(const std::vector<std::string>& rules)
+		void									printRules(const std::vector<std::string>& rules)
 		{
-			std::string				line;
-			bool					set;
+			std::string							line;
+			bool								set;
 			
 			for (int j = 0; j < (int)rules.size(); j++) {
 				line = rules[j];
@@ -71,7 +71,7 @@ class TermUI {
 			}
 		}
 		
-		std::string					getStates(const std::vector<std::string>& rules)
+		std::string								getStates(const std::vector<std::string>& rules)
 		{
 			for (int i = 0; i < (int)rules.size(); i++)
 				if (rules[i][0] == '=' && isalpha(rules[i][1]))
@@ -79,22 +79,23 @@ class TermUI {
 			return ("nothing");
 		}
 
-		void						filePutContents(const std::string& name, const std::string& content, bool append = false)
+		void									filePutContents(const std::string& name, const std::string& content, bool append = false)
 		{
-			std::ofstream				outfile;
+			std::ofstream outfile;
 			if (append)
 				outfile.open(name, std::ios_base::app);
 			else
 				outfile.open(name);
 			outfile << content;
+			outfile.close();
 		}
 
 	public:
 
-		std::string					interact()
+		std::string								interact()
 		{
-			std::string				line;
-			int					i = 1;
+			std::string							line;
+			int									i = 1;
 			
 			while (1) {
 				PRINT BLUE BOLD "Rule " << i << " : "<<RESET BOLD;
@@ -109,11 +110,11 @@ class TermUI {
 			return "temp.txt";
 		}
 
-		void						InitUI(const std::vector<std::string>& argv)
+		void									InitUI(const std::vector<std::string>& argv)
 		{
-			Rules					r;
-			std::vector<std::string>		rule;
-			std::string				states;
+			Rules								r;
+			std::vector<std::string>			rule;
+			std::string							states;
 
 			states = getStates(argv);
 			rule = r.getRules(argv);
@@ -125,12 +126,12 @@ class TermUI {
 
 		}
 		
-		void 						queryLoop(void)
+		void 									queryLoop(void)
 		{
-			InstructionMap				q;
-			std::string				option;
-			std::string				query;
-			int					errors;
+			InstructionMap						q;
+			std::string							option;
+			std::string							query;
+			int									errors;
 		
 			while (1) {
 				errors = 0;
