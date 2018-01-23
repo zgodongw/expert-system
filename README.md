@@ -50,6 +50,6 @@ cd ./expert-system && make re
 
 with make [1 - 9] to run given test cases.
 
-or ./system
+or ./expert-system
 
 and insert rules.
